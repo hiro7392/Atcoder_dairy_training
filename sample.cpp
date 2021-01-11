@@ -23,17 +23,13 @@ long long modinv(long long a, long long m) {
     if (u < 0) u += m;
     return u;
 }
-char maze[2010][2010];
-//dist[i][k]=sx,syからの最短距離
-long long dist[2010][2010];
-//solved 2021/01/02
+
 int dx[4]={1,0,-1,0};
 int dy[4]={0,1,0,-1};
+#define debug 0
+
 int main(){
-    printf("debug1\n");
-    asm("int3");
-    printf("debug2\n");
-    printf("debug3¥n");
+    
 }
 /*
 
