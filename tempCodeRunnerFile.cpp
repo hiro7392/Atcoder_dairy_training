@@ -26,13 +26,11 @@ long long modinv(long long a, long long m) {
 struct UnionFind {
     vector<int> par; // par[i]:iの親の番号　(例) par[3] = 2 : 3の親が2
     //member_class[i][c]:自分と同じグループに属するクラスcの人数
-    vector<map<int,int>> member_class;
-    vector<int>size;
-    UnionFind(int N,vector<int>c) : par(N),member_class(N),size(N){ //最初は全てが根であるとして初期化
+    vector<vector<int>> member_class;
+    UnionFind(int N,vector<int>c) : par(N),member_class(N,vector<int>(N,0)){ //最初は全てが根であるとして初期化
         for(int i = 0; i < N; i++){
             par[i] = i;
             member_class[i][c[i]]=1;
-            size[i]=1;
         } 
     }
 
@@ -41,32 +39,19 @@ struct UnionFind {
         return par[x] = root(par[x]);
     }
 
-    //大きい集合に小さい集合を吸収させる
     void unite(int x, int y) { // xとyの木を併合
         int rx = root(x); //xの根をrx
         int ry = root(y); //yの根をry
         if (rx == ry) return; //xとyの根が同じ(=同じ木にある)時はそのまま
-        if(size[ry]>size[rx]){
         par[rx] = ry; //xとyの根が同じでない(=同じ木にない)時：xの根rxをyの根ryにつける
-        size[ry]+=size[rx];
-        sum(rx,ry);
-        }
-        else{
-        par[ry] = rx; //xとyの根が同じでない(=同じ木にない)時：xの根rxをyの根ryにつける
-        size[rx]+=size[ry];
-        sum(ry,rx);
-        }
+        sum(rx,ry,par.size());
         return;
     }
     //xの親がyになるので、
     //xのグループに所属する各クラスの人数をyにたす
-    void sum(int x,int y){
-        // rep(i,n){
-        //     member_class[y][i]+=member_class[x][i];
-        // }
-        //map<int,int>であるmap1 の中身を map2に移す
-        for(auto now:member_class[x]) {
-        member_class[y][now.first]+=now.second;
+    void sum(int x,int y,int n){
+        rep(i,n){
+            member_class[y][i]+=member_class[x][i];
         }
         return;
     }
