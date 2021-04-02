@@ -40,26 +40,23 @@ int dy[4]={0,1,0,-1};
 #define debug 0
 
 int main(){
-    long long k;
-    cin>>k;
-
-    string s;
-    string t;
-    cin>>s;
-    cin>>t;
-    long long sumS=0,sumT=0;
-    int s_num[10]={},t_num[10]={};//1~9
-    rep(i,4){
-        int sn=s[i]-'1';
-        int tn=t[i]='1';
-        s_num[sn]++;
-        t_num[tn]++;
+    
+    int n;
+    int64_t s,d;
+    cin>>n>>s>>d;
+    bool ans=false;
+    string out="No";
+    rep(i,n){
+        long long x,y;
+        cin>>x>>y;
+        if(x<s && y>d){
+            ans=true;
+            break;
+        }
     }
-    rep2(i,9){
-        sumS+=i*modpow(10,s_num[i]);
-        sumT+=i*modpow(10,t_num[i]);
-    }
-
+    
+    if(ans)out="Yes";
+    cout<<out<<endl;
 
 }
 /*
