@@ -29,21 +29,25 @@ int dy[4]={0,1,0,-1};
 #define debug 0
 
 int main(){
-    long long n;
-    cin>>n;
-
-    bool ans=false;
-    long long cost=INF;
-    rep(i,n){
-        long long a,p,x;
-        cin>>a>>p>>x;
-        if(a<x)cost=min(cost,p);
-    }
-    if(cost==INF){
-        cout<<"-1\n";
-    }
-    else{
-        cout<<cost<<endl;
+    long long a,b;
+    cin>>a>>b;
+    long long ans=1;
+    
+    for(int i=b-a;i>=1;i--){
+        int an=a%i;
+        if(an==0){
+            if(i<=b-a){
+                cout<<i<<endl;
+                return 0;
+            }
+        }
+        else{
+            int k=2*i-an;
+            if(k<=b-a){
+                cout<<i<<endl;
+                return 0;
+            }
+        }
     }
 }
 /*

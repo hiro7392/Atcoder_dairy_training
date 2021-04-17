@@ -29,22 +29,24 @@ int dy[4]={0,1,0,-1};
 #define debug 0
 
 int main(){
-    long long n;
-    cin>>n;
-
-    bool ans=false;
-    long long cost=INF;
+    
+    bool exist[1010]={};
+    int n,m;
+    cin>>n>>m;
     rep(i,n){
-        long long a,p,x;
-        cin>>a>>p>>x;
-        if(a<x)cost=min(cost,p);
+        int a;
+        cin>>a;
+        exist[a]=!exist[a];
     }
-    if(cost==INF){
-        cout<<"-1\n";
+    rep(i,m){
+        int a;
+        cin>>a;
+        exist[a]=!exist[a];
     }
-    else{
-        cout<<cost<<endl;
+    for(int i=1;i<=1000;i++){
+        if(exist[i])cout<<i<<" ";
     }
+    cout<<endl;
 }
 /*
 

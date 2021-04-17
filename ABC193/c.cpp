@@ -27,9 +27,32 @@ long long modinv(long long a, long long m) {
 int dx[4]={1,0,-1,0};
 int dy[4]={0,1,0,-1};
 #define debug 0
-
+vector<pair<long long, long long> > prime_factorize(long long n) {
+    vector<pair<long long, long long> > res;
+    for (long long p = 2; p * p <= n; ++p) {
+        if (n % p != 0) continue;
+        int num = 0;
+        while (n % p == 0) { ++num; n /= p; }
+        res.push_back(make_pair(p, num));
+    }
+    if (n != 1) res.push_back(make_pair(n, 1));
+    return res;
+}
 int main(){
-    
+    long long n;
+    cin>>n;
+
+    long long ans=0;
+    for(long long i=1;i<=n;i++){
+        vector<pair<long long,long long>> p=prime_factorize(i);
+        
+        if(p.size()>=2 ){
+            printf("%d ",i);
+            ans++;
+        }
+    }
+
+    cout<<ans<<endl;
 }
 /*
 

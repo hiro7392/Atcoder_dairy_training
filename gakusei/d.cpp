@@ -24,27 +24,27 @@ long long modinv(long long a, long long m) {
     return u;
 }
 
+long long modpow(long long a, long long n, long long mod) {
+    long long res = 1;
+    while (n > 0) {
+        if (n & 1) res = res * a % mod;
+        a = a * a % mod;
+        n >>= 1;
+    }
+    return res;
+}
 int dx[4]={1,0,-1,0};
 int dy[4]={0,1,0,-1};
 #define debug 0
 
 int main(){
-    long long n;
-    cin>>n;
+    long long n,p;
+    cin>>n>>p;
+    //全通り
+    long long all=modpow(p-1,n,mod);
+    cout<<all<<endl;
 
-    bool ans=false;
-    long long cost=INF;
-    rep(i,n){
-        long long a,p,x;
-        cin>>a>>p>>x;
-        if(a<x)cost=min(cost,p);
-    }
-    if(cost==INF){
-        cout<<"-1\n";
-    }
-    else{
-        cout<<cost<<endl;
-    }
+    
 }
 /*
 

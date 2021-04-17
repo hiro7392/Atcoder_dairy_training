@@ -29,22 +29,12 @@ int dy[4]={0,1,0,-1};
 #define debug 0
 
 int main(){
-    long long n;
-    cin>>n;
+    double x,y,z;
+    cin>>x>>y>>z;
 
-    bool ans=false;
-    long long cost=INF;
-    rep(i,n){
-        long long a,p,x;
-        cin>>a>>p>>x;
-        if(a<x)cost=min(cost,p);
-    }
-    if(cost==INF){
-        cout<<"-1\n";
-    }
-    else{
-        cout<<cost<<endl;
-    }
+    double ans=floor((y*z)/x);
+    if(ans==(y*z)/x)ans-=1.0;
+    cout<<ans<<endl;
 }
 /*
 
