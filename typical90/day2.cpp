@@ -28,10 +28,87 @@ int dx[4]={1,0,-1,0};
 int dy[4]={0,1,0,-1};
 #define debug 0
 
-int main(){
+//constexpr char bracket[2]={'(',')'};
+
+void dfs(string now,int limit,int lb,int rb){
     
+
+    if(lb<rb)return;
+
+    int len=now.size();
+    if(limit<=len && lb==rb){
+        //cout<<now<<"lb  "<<lb<<"rb "<<rb<<endl;
+        cout<<now<<endl;
+        return;
+    }
+    else if(limit==len){
+        return;
+    }
+    else{
+        //cout<<"making bracker .."<<endl;
+        string add_right;
+        string add_left;
+        add_right=now+")";
+        add_left=now+"(";
+        dfs(add_left,limit,lb+1,rb);
+        dfs(add_right,limit,lb,rb+1);
+        
+        return;
+    }
+    
+}
+
+int main(){
+    int n;
+    cin>>n;
+    string start="(";
+    if(n%2)return 0;
+    dfs(start,n,1,0);
+
+    return 0;
 }
 /*
 
-
+()()()()()
+()()()(())
+()()(())()
+()()(()())
+()()((()))
+()(())()()
+()(())(())
+()(()())()
+()(()()())
+()(()(()))
+()((()))()
+()((())())
+()((()()))
+()(((())))
+(())()()()
+(())()(())
+(())(())()
+(())(()())
+(())((()))
+(()())()()
+(()())(())
+(()()())()
+(()()()())
+(()()(()))
+(()(()))()
+(()(())())
+(()(()()))
+(()((())))
+((()))()()
+((()))(())
+((())())()
+((())()())
+((())(()))
+((()()))()
+((()())())
+((()()()))
+((()(())))
+(((())))()
+(((()))())
+(((())()))
+(((()())))
+((((()))))
 */
