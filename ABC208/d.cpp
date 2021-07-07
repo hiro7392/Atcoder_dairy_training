@@ -34,8 +34,14 @@ int main(){
     int n,m;
     cin>>n>>m;
 
-    long long dist[410][410][410];
-    rep(i,400)rep(k,400)rep(t,400)dist[i][k][t]=INF;
+    long long dist[410][410]={};
+    rep(i,n){
+        rep(k,n){
+        if(i==k)continue;
+        dist[i][k]=INF;
+        }
+    }
+
     
     long long ans=0;
 
@@ -43,41 +49,38 @@ int main(){
         int a,b,c;
         cin>>a>>b>>c;
         a--,b--;
-        rep(k,n){
-            dist[a][b][0]=c;
-        }
-        ans+=0;
+        dist[a][b]=c;
+        //ans+=c;
     }
 
-    //dist[s][t][k]:=都市sからk以下の都市を巡って都市tへ移動する最短経路
+    //dist[s][t]:=都市sからk以下の都市を巡って都市tへ移動する最短経路
 
-    //k以下の番号について回る
-
-
+    //k以下の番号について回りながらその時の最短距離を追加していく
+        
+        
         //経由する頂点
-        for(int j=1;j<n;j++){
+        for(int k=0;k<n;k++){
             //始点
+            long long nxt[410][410]={};
             rep(s,n){
                 //終点
                 rep(t,n){
-                    if(s==t || j==t ||j==s)continue;
+                    // s->tの最短パスはk+1を使うかどうかで判断できる
 
-                    dist[s][t][k=min(dist[s][t][k-1],dist[s][t])]
+                    //(i)k+1を使わない場合
+                    //f(s,t,k+1)=f(s,t,k)
+
+                    //(ii)k+1を使う場合
+                    //f(s,t,k+1)=f(s,k+1,k)+f(k+1,t,k)
+                    dist[s][t]=min(dist[s][t],dist[s][k]+dist[k][t]);
+                    if(dist[s][t]<INF)ans+=dist[s][t];
+                    
                 }
+
             }
+            
         }
-    
-    rep(k,n){
-        rep(s,n){
-            rep(t,n){
-                if(s==t)continue;
-                if(dist[s][t][k]==INF)continue;
-                ans+=dist[s][t][k];
-                printf("(s,t,k)=(%d,%d,%d)=%lld \n",s+1,t+1,k+1,dist[s][t][k]);
-            }
-        }
-    }
-    cout<<ans<<endl;
+        cout<<ans<<endl;
 }
 /*
 3 2
@@ -115,4 +118,16 @@ int main(){
 
 517
 
+
+
+5 6
+1 3 2
+3 2 5
+2 1 4
+2 5 2
+5 3 1
+5 4 4
+
+
+212
 */
