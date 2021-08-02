@@ -28,61 +28,45 @@ int dx[4]={1,0,-1,0};
 int dy[4]={0,1,0,-1};
 #define debug 0
 
-vector<vector<int>>edge(100010);
+vector<vector<int> >edge(100010);
 
+pair<int,int> dfs(int now,int before,int dist){
 
-int dfs(int st,int now, int dist,int before){
-    
-    if(now==start)return dist;
-
-    int ret=answer;
-    for(auto next:edge[now]){
-        if(next==before)continue;
-
-        answer=dfs(st,next,dist+1,now);
+    int ret=dist;
+    int node=now;
+    for(auto nx:edge[now]){
+        if(nx==before)continue;
+        else{
+            auto tmp=dfs(nx,now,dist+1);
+            if(ret<tmp.first){
+                ret=tmp.first;
+                node=tmp.second;
+            }
+            //ret=max(ret,dfs(nx,now,dist+1).first);
+        }
     }
-    return ret;
+    return make_pair(ret,node);
 }
 
 int main(){
     int n;
     cin>>n;
-    
-    
+    int a,b;
 
-    vector<long long>vec(1,1000);//(サイズ,要素の中身)
-
-    //初期化
-    vector<vector<long long>>dist(n+1,vector<long long>(n+1,INF));
-
-    for(int i=1;i<n;i++){
-        int a,b;
+    rep(i,n-1){
         cin>>a>>b;
         a--,b--;
-        //dist[a][b]=dist[b][a]=1;
         edge[a].push_back(b);
         edge[b].push_back(a);
     }
+    int start=0;
+    
+    int next=dfs(start,-1,0).second;
+#if debug
+    cout<<"next "<<next<<endl;
+#endif
+    cout<<dfs(next,-1,0).first+1<<endl;
 
-
-
-
-    //ワーシャルフロイドで最短経路を求める
-    for(int i=1;i<=n;i++){
-        for(int k=1;k<=n;k++){
-            for(int j=1;j<=n;j++){
-                if(i==j || k==j)continue;
-                dist[i][k]=min(dist[i][k],dist[i][j]+dist[j][k]);
-            }
-        }
-    }
-
-    for(int i=1;i<=n;i++){
-        for(int k=1;i<=n;k++){
-            //cout<<dist[i][k]<<" ";
-        }
-        cout<<endl;
-    }
 
     return 0;
 }
