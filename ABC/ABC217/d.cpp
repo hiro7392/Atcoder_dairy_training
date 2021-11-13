@@ -1,8 +1,5 @@
-#include<iostream>
-#include<vector>
-#include<map>
-#include<algorithm>
-#include<set>
+#include<bits/stdc++.h>
+
 #define rep(i,N) for(int i=0;i<N;i++)
 #define rep2(i,N) for(int i=1;i<=N;i++)
 using namespace std;

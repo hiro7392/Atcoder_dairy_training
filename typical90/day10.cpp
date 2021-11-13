@@ -30,7 +30,8 @@ int main() {
   rep(i, q) {
     long long l, r;
     cin >> l >> r;
-    cout << sum[0][r] - sum[0][l] << " " << sum[1][r] - sum[1][l] << endl;
+    cout << sum[0][r] - sum[0][l - 1] << " " << sum[1][r] - sum[1][l - 1]
+         << endl;
   }
   return 0;
 }

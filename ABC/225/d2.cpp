@@ -39,18 +39,20 @@ int main() {
       cin >> x;
       x--;
       //まずxが連結している電車の先頭へ移動
-      while (front[x] > 0) {
+      while (front[x] >= 0) {
         x = front[x];
         if (front[x] < 0) break;
       }
+      // xが所属する列車の要素を先頭から入れた配列
       vector<long long> ans;
+      //最後尾まで移動しながら入れていく
       while (x >= 0) {
         ans.push_back(x);
         x = back[x];
       }
       cout << ans.size() << " ";
       for (auto now : ans) {
-        cout << now+1 << " ";
+        cout << now + 1 << " ";
       }
       cout << endl;
     }
