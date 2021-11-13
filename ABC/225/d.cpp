@@ -64,7 +64,7 @@ struct UnionFind {
     par[y] = x;
     // child
     // child[x] = y;
-    distFromTop[y] = size(root(x));
+    distFromTop[y] = root(x);
     end(y);
     return true;
   }
