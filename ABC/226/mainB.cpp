@@ -12,8 +12,28 @@ int dy[4]={0,1,0,-1};
 #define debug 0
 
 int main(){
+ int n;
+ cin>>n;
  
- 
+ int ans=n;
+ set<string>stringSet;
+
+ rep(i,n){
+     int l;
+     cin>>l;
+     char c;
+     string nowStr="";
+     rep(k,l){
+            cin>>c;
+            nowStr.append(1,c);
+     }
+     if(stringSet.find(nowStr)!=stringSet.end())ans--;
+     else{
+         stringSet.insert(nowStr);
+     }
+ }
+ cout<<ans<<endl;
+ return 0;
 }
 /*
 
