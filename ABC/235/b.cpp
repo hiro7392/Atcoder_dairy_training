@@ -12,11 +12,23 @@ int dy[4]={0,1,0,-1};
 #define debug 0
 
 int main(){
-    
+    int n;
+    cin>>n;
+    long long now=0;
+    long long h;
+    long long ans=1;
+    rep(i,n){
+        cin>>h;
+        if(now<h){
+            ans=i+1;
+            now=h;
+        }else{
+            break;
+        }
+    }
+    cout<<now<<endl;
 }
 /*
-
-//縦21 横64
 
 
 
