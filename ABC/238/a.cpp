@@ -11,7 +11,17 @@ int dy[4]={0,1,0,-1};
 #define debug 0
 
 int main(){
+    long long n;
+    cin>>n;
     
+    double left=log2f(2)*n;
+    double right=2*log2f(n);
+
+    if(left>right){
+        cout<<"Yes"<<endl;
+    }else{
+        cout<<"No"<<endl;
+    }
 }
 /*
 
